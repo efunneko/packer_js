@@ -19,44 +19,44 @@ First define some data types. BE AWARE that the library assigns numerical values
 each data type that it uses in serialization. The order of definition of the types
 makes a difference.
 
-   var packer = new Packer();
-
-   packer.typedef({name: "testStruct", 
-                   type: "struct",
-                   fields: [
-                       {name:  "one",   type:  "int"},
-                       {name:  "two",   type:  "string"},
-                       {name:  "three", type:  "test"},
-                       {name:  "float", type:  "float"},
-                       {name:  "four",  type:  "struct",
-                        fields: [
-                            {name: "subone", type: "int"},
-                            {name: "subtwo", type: "int"}
-                        ]}
-                   ]});
-
-   packer.typedef({name: "myArray",
-                   type: "array",
-                   entryType: "int"});
+    var packer = new Packer();
+ 
+    packer.typedef({name: "testStruct", 
+                    type: "struct",
+                    fields: [
+                        {name:  "one",   type:  "int"},
+                        {name:  "two",   type:  "string"},
+                        {name:  "three", type:  "test"},
+                        {name:  "float", type:  "float"},
+                        {name:  "four",  type:  "struct",
+                         fields: [
+                             {name: "subone", type: "int"},
+                             {name: "subtwo", type: "int"}
+                         ]}
+                    ]});
+ 
+    packer.typedef({name: "myArray",
+                    type: "array",
+                    entryType: "int"});
 
 
 After the types are defined, you can pack them with the pack command:
 
-   var data = {
-       one: 1,
-       float: 2.21232,
-       two: "test string",
-       three: "another string",
-       four: {subone: 33030303,
-              subtwo: 43030303}
-   };
-
-   // This will return an ArrayBuffer with the structure encoded in it
-   var packed = packer.pack("testStruct", data);
+    var data = {
+        one: 1,
+        float: 2.21232,
+        two: "test string",
+        three: "another string",
+        four: {subone: 33030303,
+               subtwo: 43030303}
+    };
+ 
+    // This will return an ArrayBuffer with the structure encoded in it
+    var packed = packer.pack("testStruct", data);
 
 To unpack the data into a javascript object:
 
-   // The packed data has sufficient info to unpack without specifying the data type
-   var unpacked = packer.unpack(packed);
+    // The packed data has sufficient info to unpack without specifying the data type
+    var unpacked = packer.unpack(packed);
 
 
