@@ -57,7 +57,7 @@
                             {name:  "array", type:  "array", entryType: "testStruct"},
                         ]});
 
-        console.log(packer);
+        // console.log(packer);
 
 
         // Run some tests
@@ -67,7 +67,7 @@
                "ERROR");
                
         toPack = {
-            one: 1,
+            one: -10,
             float: 2.21232,
             two: "test string",
             three: "another string",
@@ -108,6 +108,12 @@
                 result = "FAIL";
             }
             $("table tr").last().parent().append($("<tr><td>" + testNum + "</td><td>" + desc + "</td><td>" + result + "</td><td>" + packed.byteLength + "</td><td>" + JSON.stringify(data).length + " </td></tr>"));
+            if (result == "FAIL") {
+                console.log("Test " + testNum + " failed:");
+                console.log("original:", data);
+                console.log("packed:", packed.toArray());
+                console.log("unpacked:", unpacked);
+            }
             testNum++;
         }
 
