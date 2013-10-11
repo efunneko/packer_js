@@ -363,6 +363,11 @@
 
             var typeObj = expectedType ? expectedType : this.typeArr[typeCode].typeObj;
 
+            // A bit of grossness here to account for how we encode negative integers
+            if (typeObj.name == "int" && this.typeArr[typeCode].name == "neg-int") {
+                typeObj = this.typeArr[typeCode].typeObj;
+            }
+
             if (!typeObj) {
                 error("Failed to unpack data. Unknown type code: " + typeCode);
             }
